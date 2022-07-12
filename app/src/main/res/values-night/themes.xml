@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.CLM" parent="Theme.MaterialComponents.NoActionBar">
+        <item name="colorPrimary">@color/indigo_600</item>
+        <item name="colorPrimaryVariant">@color/indigo_900</item>
+        <item name="colorSecondary">@color/indigo_a700</item>
+        <item name="colorSurface">@color/gray_900</item>
+        <item name="colorOnSurface">@color/white</item>
+        <item name="colorError">@color/red_900</item>
+        <item name="android:colorBackground">@color/gray_900</item>
+    </style>
+</resources>

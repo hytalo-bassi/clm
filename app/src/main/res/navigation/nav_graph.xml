@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph.xml"
+    app:startDestination="@id/clmFragment">
+
+    <fragment
+        android:id="@+id/clmFragment"
+        android:name="com.example.clm.ClmFragment"
+        android:label="@string/app_name"
+        tools:layout="@layout/fragment_clm">
+
+        <action
+            android:id="@+id/action_mainFragment_to_registrationFragment"
+            app:destination="@id/registrationFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_clienteFragment"
+            app:destination="@id/clienteFragment" />
+        <action
+            android:id="@+id/action_clmFragment_to_containerSettingsFragment"
+            app:destination="@id/containerSettingsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/registrationFragment"
+        android:name="com.example.clm.RegistrationFragment"
+        android:label="@string/registrar_cliente"
+        tools:layout="@layout/fragment_registration"/>
+
+    <fragment
+        android:id="@+id/clienteFragment"
+        android:name="com.example.clm.ClienteFragment"
+        android:label="@string/cliente"
+        tools:layout="@layout/fragment_cliente" >
+
+
+        <argument
+            android:name="clienteCpfCnpj"
+            app:argType="string" />
+
+        <argument
+            android:name="razaoSocial"
+            app:argType="string" />
+
+        <argument
+            android:name="email"
+            app:argType="string" />
+
+        <argument
+            android:name="telefone"
+            app:argType="string"
+            app:nullable="true" />
+
+        <argument
+            android:name="cep"
+            app:argType="string" />
+
+        <argument
+            android:name="cidade"
+            app:argType="string" />
+
+        <argument
+            android:name="uf"
+            app:argType="string" />
+
+        <argument
+            android:name="bairro"
+            app:argType="string" />
+
+        <argument
+            android:name="logradouro"
+            app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/containerSettingsFragment"
+        android:name="com.example.clm.ContainerSettingsFragment"
+        android:label="@string/configuracoes"
+        tools:layout="@layout/fragment_container_settings" />
+
+</navigation>

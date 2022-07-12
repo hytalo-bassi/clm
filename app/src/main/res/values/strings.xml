@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">CLM</string>
+    <string name="razao_social">Razão Social</string>
+    <string name="cpf_cnpj">CPF/CNPJ</string>
+    <string name="cidade">Cidade</string>
+    <string name="uf">UF</string>
+    <string name="email">E-mail</string>
+    <string name="telefone">Telefone (opcional)</string>
+    <string name="contato">Contato</string>
+    <string name="logradouro">Logradouro</string>
+    <string name="bairro">Bairro</string>
+    <string name="sem_clientes">Sem clientes cadastrados</string>
+    <string name="registrar_cliente">Registrar cliente</string>
+    <string name="configuracoes">Configurações</string>
+    <string name="cliente">Cliente</string>
+    <string name="endereco">Endereço</string>
+    <string name="info">Informações</string>
+</resources>
