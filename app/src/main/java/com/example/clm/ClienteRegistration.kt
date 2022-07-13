@@ -17,7 +17,7 @@ class ClienteRegistration : Fragment() {
     ): View {
 
         val binding = FragmentClienteBinding.inflate(inflater, container, false)
-
+        // TODO(Desmascarar inputs durante envio das informacoes)
         return binding.root
     }
 }
