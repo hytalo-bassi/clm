@@ -2,7 +2,6 @@ package com.example.clm.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.clm.adapters.ClienteListAdapter
 import com.example.core_db.data.Cliente
 import com.example.core_db.data.ClienteRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,6 +16,8 @@ class ClmFragmentViewModel @Inject constructor(
 
         viewModelScope.launch {
             val clientes = clienteRepository.clientesCadastradosAsync().await()
+
+            // TODO(Mascarar CPF, CNPJ e telefone para o RecyclerView)
             clienteList.addAll(clientes)
             callback(clienteList)
         }
