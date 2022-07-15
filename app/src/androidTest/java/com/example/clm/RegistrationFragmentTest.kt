@@ -32,7 +32,7 @@ class RegistrationFragmentTest {
         val faker = Faker(Locale("pt-br"))
 
         return Cliente(
-            clienteCpfCnpj = faker.cnpj().valid(),
+            clienteCpfCnpj = faker.cnpj().valid(false),
             razaoSocial = faker.name().name(),
             cep = "79117-572",
             uf = "MS",
@@ -41,7 +41,7 @@ class RegistrationFragmentTest {
             logradouro = "Avenida Onelia Zaparoli Testa",
             numero = "S/N",
             email = faker.internet().emailAddress(),
-            telefone = faker.phoneNumber().cellPhone()
+            telefone = faker.numerify("###########")
         )
     }
 

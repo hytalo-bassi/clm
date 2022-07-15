@@ -26,7 +26,6 @@ class RegistrationFragment : Fragment() {
 
         val binding = FragmentRegistrationBinding.inflate(inflater, container, false)
 
-        // TODO(UTILIZAR MASCARAS NAS INPUTS)
         binding.sendButton.setOnClickListener { view ->
             registrarCliente(binding)
             view.findNavController().navigate(R.id.clmFragment)
@@ -35,10 +34,16 @@ class RegistrationFragment : Fragment() {
         return binding.root
     }
 
+    private fun removerChar(s: String): String {
+        val nonDigit = Regex("\\D")
+
+        return s.replace(nonDigit, "")
+    }
+
     private fun registrarCliente(binding: FragmentRegistrationBinding) {
 
         val cliente = Cliente(
-            clienteCpfCnpj = binding.cpfCnpj.text.toString(),
+            clienteCpfCnpj = removerChar(binding.cpfCnpj.text.toString()),
             razaoSocial = binding.razaoSocial.text.toString(),
             cep = "", // TODO(ADICIONAR AS INPUTS RESTANTES)
             cidade = binding.cidade.text.toString(),
@@ -47,7 +52,7 @@ class RegistrationFragment : Fragment() {
             logradouro = binding.logradouro.text.toString(),
             numero = "",
             email = binding.email.text.toString(),
-            telefone = binding.telefone.text.toString()
+            telefone = removerChar(binding.telefone.text.toString())
         )
 
         lifecycleScope.launch {

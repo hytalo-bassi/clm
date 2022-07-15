@@ -11,8 +11,5 @@ class RegistrationViewModel @Inject constructor(
     private val clienteRepository: ClienteRepository
 ) : ViewModel() {
 
-    fun registrarCliente(cliente: Cliente) {
-        clienteRepository.cadastrarCliente(cliente)
-    }
-
+    fun registrarCliente(cliente: Cliente) = clienteRepository.cadastrarCliente(cliente)
 }
