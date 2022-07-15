@@ -26,7 +26,6 @@ class ClienteFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        // TODO(Mascarar CPF, CNPJ e telefone para o fragmento Cliente)
         binding.cliente = Cliente(
             clienteCpfCnpj = args.clienteCpfCnpj,
             razaoSocial = args.razaoSocial,

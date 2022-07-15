@@ -44,8 +44,7 @@
                 android:inputType="number"
                 android:id="@+id/cpfCnpj"
                 android:digits="0123456789-./"
-                app:mask="@{`[000].[000].[000]-[00]`}"
-                app:affine="@{`[00].[000].[000]/[0000]-[00]`}" />
+                app:mask="@{`[000].[000].[000]-[00][|][00].[000].[000]/[0000]-[00]`}" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
