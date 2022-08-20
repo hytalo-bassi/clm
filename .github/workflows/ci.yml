@@ -19,7 +19,7 @@ jobs:
       - name: Executar a tarefa package do Gradle
         uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
         with:
-          arguments: -b ci.gradle package
+          arguments: build
       - name: Testar
         uses: reactivecircus/android-emulator-runner@v2
         with:
