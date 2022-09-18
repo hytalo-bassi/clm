@@ -1,4 +1,4 @@
-<resources>
+﻿<resources>
     <string name="app_name">CLM</string>
     <string name="razao_social">Razão Social</string>
     <string name="cpf_cnpj">CPF/CNPJ</string>
@@ -15,4 +15,10 @@
     <string name="cliente">Cliente</string>
     <string name="endereco">Endereço</string>
     <string name="info">Informações</string>
+    <string name="editar">Editar</string>
+    <string name="compartilhar">Compartilhar</string>
+    <string name="deletar">Deletar</string>
+    <string name="texto_compartilhamento">Razão Social: %s\nCPF/CNPJ: %s\nCEP: %s\n%s / %s\nBairro: %s\nLogradouro: %s\nE-mail: %s\nTelefone: %s</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="dialogo_deletar_cliente">"Os documentos associados também serão deletados! Essa ação é irreversível. "</string>
 </resources>

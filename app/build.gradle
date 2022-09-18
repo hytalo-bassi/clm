@@ -113,6 +113,8 @@ dependencies {
     implementation "com.google.dagger:hilt-android:$hilt_version"
     kapt "com.google.dagger:hilt-compiler:$hilt_version"
 
+    implementation("androidx.appcompat:appcompat:1.5.1")
+
     // For instrumentation tests
     androidTestImplementation "com.google.dagger:hilt-android-testing:$hilt_version"
     kaptAndroidTest "com.google.dagger:hilt-compiler:$hilt_version"
@@ -125,5 +127,6 @@ dependencies {
     implementation "androidx.core:core-ktx:1.8.0"
     implementation "net.datafaker:datafaker:1.4.0"
     implementation 'com.github.RedMadRobot:input-mask-android:6.1.0'
+    implementation 'com.google.code.gson:gson:2.9.1'
 
 }

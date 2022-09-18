@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/editar_cliente"
+        android:title="@string/editar"
+        android:icon="@drawable/ic_edit"
+        app:showAsAction="ifRoom"/>
+
+    <item android:id="@+id/enviar_cliente"
+        android:title="@string/compartilhar"
+        android:icon="@drawable/ic_send"
+        app:showAsAction="ifRoom"/>
+
+    <item android:id="@+id/deletar_cliente"
+        android:title="@string/deletar"
+        android:icon="@drawable/ic_delete"
+        app:showAsAction="ifRoom"/>
+</menu>
