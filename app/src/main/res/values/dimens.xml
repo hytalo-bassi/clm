@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="margem_horizontal_cliente">12dp</dimen>
+    <dimen name="margem_chao_cliente">12dp</dimen>
+</resources>

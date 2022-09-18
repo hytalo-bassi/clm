@@ -7,13 +7,13 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "clientes")
 data class Cliente (
     @PrimaryKey @ColumnInfo(name = "cpfcnpj") val clienteCpfCnpj: String,
-    val razaoSocial: String,
-    val cep: String,
-    val uf: String,
-    val cidade: String,
-    val bairro: String,
-    val logradouro: String,
-    val numero: String,
-    val email: String,
-    val telefone: String?
+    var razaoSocial: String,
+    var cep: String,
+    var uf: String,
+    var cidade: String,
+    var bairro: String,
+    var logradouro: String,
+    var numero: String,
+    var email: String,
+    var telefone: String?
 )

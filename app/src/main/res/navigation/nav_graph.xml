@@ -20,6 +20,9 @@
         <action
             android:id="@+id/action_clmFragment_to_containerSettingsFragment"
             app:destination="@id/containerSettingsFragment" />
+        <action
+            android:id="@+id/clmFragment_para_editarClienteFragment"
+            app:destination="@+id/editarClienteFragment" />
     </fragment>
 
     <fragment
@@ -70,6 +73,18 @@
 
         <argument
             android:name="logradouro"
+            app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/editarClienteFragment"
+        android:name="com.example.clm.EditarClienteFragment"
+        android:label="Editar cliente"
+        tools:layout="@layout/fragment_editar_cliente">
+
+        <!-- cliente é um objeto GSON -->
+        <argument
+            android:name="cliente"
             app:argType="string" />
     </fragment>
 

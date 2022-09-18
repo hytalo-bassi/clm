@@ -12,35 +12,33 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="16dp"
+        android:orientation="vertical"
+        android:padding="12dp"
         android:id="@+id/clienteRow">
 
-        <QuickContactBadge
-            android:id="@+id/quickcontact"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            android:layout_marginEnd="12dp"/>
-
-        <LinearLayout
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:text="@{cliente.razaoSocial}"
+            android:textAppearance="?attr/textAppearanceSubtitle2"
+            android:id="@+id/razaoSocial"
+            tools:text="Razao Social"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{cliente.razaoSocial}"
-                android:id="@+id/razaoSocial"
-                tools:text="Razao Social"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{cliente.telefone}"
+            android:textAppearance="?attr/textAppearanceBody2"
+            app:mask="@{`(##) #####-####`}"
+            tools:text="(99) 99999-9999"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{cliente.telefone}"
-                app:mask="@{`(##) #####-####`}"
-                tools:text="(99) 99999-9999"/>
-        </LinearLayout>
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="8dp" />
+
+        <com.google.android.material.divider.MaterialDivider
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
     </LinearLayout>
 </layout>

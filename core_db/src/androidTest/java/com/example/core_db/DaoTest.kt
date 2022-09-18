@@ -4,19 +4,18 @@ import android.content.Context
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.core_db.data.AppDatabase
-import com.example.core_db.data.Cliente
 import com.example.core_db.data.ClienteDao
 import kotlinx.coroutines.runBlocking
 import org.junit.After
+import org.junit.Assert.assertNotNull
 
 import org.junit.Test
 import org.junit.runner.RunWith
 
-import org.junit.Assert.*
 import org.junit.Before
 
 @RunWith(AndroidJUnit4::class)
-class LerEscreverTest {
+class DaoTest {
     private lateinit var clienteDao: ClienteDao
     private lateinit var db: AppDatabase
 
@@ -30,27 +29,43 @@ class LerEscreverTest {
     @After
     fun fecharDb() {
         db.close()
+        db.clearAllTables()
     }
 
     @Test
     fun escreverLer() = runBlocking {
-        val cliente = Cliente(
-            clienteCpfCnpj = "00000000000",
-            razaoSocial = "razaoSocial",
-            cep = "000000",
-            uf = "MS",
-            cidade = "Campo Grande",
-            bairro = "Centro",
-            logradouro = "String",
-            numero = "S/N",
-            email = "exemplo@dominio.com",
-            telefone = "00000000000"
-        )
+        val cliente = gerarCliente()
 
         clienteDao.inserir(cliente)
 
         val clientesCadastrados = clienteDao.clientesCadastrados()
+        assert(clientesCadastrados.contains(cliente))
+    }
 
-        assertEquals(listOf(cliente), clientesCadastrados)
+    @Test
+    fun escreverDeletar() = runBlocking {
+        val cliente = gerarCliente()
+
+        clienteDao.inserir(cliente)
+        clienteDao.deletar(cliente)
+        val clientesCadastrados = clienteDao.clientesCadastrados()
+
+        assert(!clientesCadastrados.contains(cliente))
+    }
+
+    @Test
+    fun escreverAtualizar() = runBlocking {
+        val cliente = gerarCliente()
+        clienteDao.inserir(cliente)
+
+        cliente.razaoSocial = "Atualização da razão social"
+
+        clienteDao.atualizarCliente(cliente)
+        runBlocking {
+            val pesquisa = clienteDao.clientesCadastrados()
+                .filter { resultado -> cliente == resultado }
+
+             assertNotNull(pesquisa)
+        }
     }
 }

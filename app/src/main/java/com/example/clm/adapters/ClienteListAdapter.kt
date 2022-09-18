@@ -1,30 +1,72 @@
 package com.example.clm.adapters
 
-import android.view.LayoutInflater
+import android.util.Log
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.ui.platform.ComposeView
 import androidx.navigation.findNavController
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.clm.ClmFragmentDirections
-import com.example.clm.R
+import com.example.clm.compose.listacliente.ListaClienteItemView
 import com.example.core_db.data.Cliente
-import com.example.clm.databinding.ListItemClienteBinding
+import com.example.clm.ui.theme.CLMTheme
+
 
 class ClienteListAdapter(
-    private val clienteList: List<Cliente>
-    ) : RecyclerView.Adapter<ClienteListAdapter.ViewHolder>() {
+    private val selecaoCliente: SelecaoCliente
+) : ListAdapter<Cliente, ClienteListAdapter.ClienteViewHolder>(ClientesDiffCallback()) {
 
-    class ViewHolder(
-        private val binding: ListItemClienteBinding
-    ) : RecyclerView.ViewHolder(binding.root) {
+    val mViewsSelecionadas : MutableList<ClienteViewHolder> = mutableListOf()
+    private val mSelecionando : MutableState<Boolean> = mutableStateOf(false)
 
-        fun bind(cliente: Cliente) {
-            binding.cliente = cliente
-            setViewClickListener(cliente)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ClienteViewHolder {
+        return ClienteViewHolder(ComposeView(parent.context), mViewsSelecionadas, mSelecionando, selecaoCliente)
+    }
+
+    override fun onBindViewHolder(holder: ClienteViewHolder, position: Int) {
+        val cliente = getItem(position)
+        holder.bind(cliente)
+    }
+
+    fun clientesSelecionados() : List<Cliente> {
+        val clientes: ArrayList<Cliente> = arrayListOf()
+        mViewsSelecionadas.forEach {
+            clientes.add(it.cliente)
         }
 
-        private fun setViewClickListener(cliente: Cliente) {
-            val acao = ClmFragmentDirections.actionMainFragmentToClienteFragment(
+        return clientes
+    }
+
+    class ClienteViewHolder(
+        composeView: ComposeView,
+        private val mViewsSelecionadas: MutableList<ClienteViewHolder>,
+        private val mSelecionando: MutableState<Boolean>,
+        private val selecaoCliente: SelecaoCliente
+    ) : RecyclerView.ViewHolder(composeView) {
+        lateinit var cliente: Cliente
+
+        fun bind(cliente: Cliente){
+            this.cliente = cliente
+
+            (itemView as ComposeView).setContent {
+                CLMTheme {
+                    ListaClienteItemView(cliente = cliente, mSelecionando) { action ->
+                        Log.i("tag", action.toString())
+                        when (action) {
+                            0 -> navegar()
+                            1 -> selecionar()
+                            2 -> reverter()
+                        }
+                    }
+                }
+            }
+        }
+
+        private fun navegar() {
+            val destino = ClmFragmentDirections.actionMainFragmentToClienteFragment(
                 cliente.clienteCpfCnpj,
                 cliente.razaoSocial,
                 cliente.email,
@@ -36,27 +78,49 @@ class ClienteListAdapter(
                 cliente.logradouro
             )
 
-            itemView.setOnClickListener {
-                itemView.findNavController().navigate(acao)
-            }
+            itemView.findNavController().navigate(destino)
+        }
+
+        private fun selecionar() {
+            if (mViewsSelecionadas.contains(this)) throw Error("Cliente já foi selecionado!")
+
+            mSelecionando.value = true
+            mViewsSelecionadas.add(this)
+            selecaoCliente.selecionar(cliente)
+        }
+
+        private fun reverter() {
+            mViewsSelecionadas.remove(this)
+            selecaoCliente.reverter(cliente)
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(
-            DataBindingUtil.inflate(
-                LayoutInflater.from(parent.context),
-                R.layout.list_item_cliente,
-                parent,
-                false
-            )
-        )
-    }
+    interface SelecaoCliente {
+        /**
+         * Chamado quando um item recebe um click prolongado. Inicialmente
+         * adicionará o item em uma lista de items selecionados.
+         *
+         * @param cliente [Cliente] selecionado.
+         */
+        fun selecionar(cliente: Cliente)
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val cliente = clienteList[position]
-        holder.bind(cliente)
+        /**
+         * Chamado quando um item já selecionado receber um segundo click.
+         * Retira um item da lista de items selecionados.
+         *
+         * @param cliente [Cliente] cliente a ser desmarcado.
+         */
+        fun reverter(cliente: Cliente)
     }
-
-    override fun getItemCount() = clienteList.size
 }
+
+class ClientesDiffCallback : DiffUtil.ItemCallback<Cliente>() {
+    override fun areItemsTheSame(oldItem: Cliente, newItem: Cliente): Boolean {
+        return oldItem == newItem
+    }
+
+    override fun areContentsTheSame(oldItem: Cliente, newItem: Cliente): Boolean {
+        return oldItem == newItem
+    }
+}
+
