@@ -9,10 +9,12 @@ import android.view.ActionMode
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
 import com.example.clm.adapters.ClienteListAdapter
 import com.example.clm.databinding.FragmentClmBinding
 import com.example.clm.viewmodels.ClienteViewModel
 import com.example.core_db.data.Cliente
+import com.google.android.material.divider.MaterialDividerItemDecoration
 import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -80,8 +82,11 @@ class ClmFragment : Fragment(), ClienteListAdapter.SelecaoCliente {
             findNavController().navigate(R.id.registrationFragment)
         }
 
+        binding.clienteList.addItemDecoration(
+            MaterialDividerItemDecoration(context!!, DividerItemDecoration.VERTICAL)
+        )
+
         // TODO(Adicionar transição do fragmento principal até o fragmento do cliente)
-        // TODO(Adicionar imagem de contato referente ao fragmento do list_cliente)
 
         modelo.mClientes.observe(viewLifecycleOwner) {
             adaptador.submitList(it)
